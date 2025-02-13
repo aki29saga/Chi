@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Love for You</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffebf0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #e60073;
+        }
+
+        .love-letter {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .gallery img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #countdown {
+            font-size: 20px;
+            color: #e60073;
+            margin-top: 20px;
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            animation: fall 5s infinite ease-in-out;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        .music-controls {
+            margin-top: 20px;
+        }
+
+        .password-protected {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>💖 My Love for You 💖</h1>
+        
+        <div id="password-section">
+            <p>Enter the secret code to access your surprise:</p>
+            <input type="password" id="password" placeholder="Enter password">
+            <button onclick="checkPassword()">Unlock</button>
+        </div>
+
+        <div id="protected-content" class="password-protected">
+            <div class="love-letter">
+                <h2>My Dearest Love,</h2>
+                <p>
+                    Every day, my heart beats for you. Though miles separate us, 
+                    our love grows stronger. You are my happiness, my peace, 
+                    and my forever. I can't wait to hold you again.  
+                </p>
+                <p>Happy Valentine's Day! 💖</p>
+            </div>
+
+            <div class="gallery">
+                <img src="https://via.placeholder.com/100" alt="Memory 1">
+                <img src="https://via.placeholder.com/100" alt="Memory 2">
+                <img src="https://via.placeholder.com/100" alt="Memory 3">
+            </div>
+
+            <p id="countdown"></p>
+
+            <div class="music-controls">
+                <audio id="bg-music" loop>
+                    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+                </audio>
+                <button onclick="toggleMusic()">Play Music</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            if (password === "love2024") {
+                document.getElementById('password-section').style.display = 'none';
+                document.getElementById('protected-content').style.display = 'block';
+            } else {
+                alert("Wrong password! Try again.");
+            }
+        }
+
+        function toggleMusic() {
+            const music = document.getElementById('bg-music');
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        }
+
+        function countdownTimer() {
+            const eventDate = new Date("March 1, 2025 00:00:00").getTime(); // Set your own date
+            const timer = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = eventDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = `Next visit in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.getElementById("countdown").innerHTML = "You're together now!";
+                }
+            }, 1000);
+        }
+
+        countdownTimer();
+    </script>
+
+</body>
+  </html>
